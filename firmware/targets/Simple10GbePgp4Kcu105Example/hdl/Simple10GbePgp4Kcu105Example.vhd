@@ -1,13 +1,13 @@
 -------------------------------------------------------------------------------
 -- Company    : SLAC National Accelerator Laboratory
 -------------------------------------------------------------------------------
--- Description: Simple 10G-BASER Example
+-- Description: Simple PGPv4 Example
 -------------------------------------------------------------------------------
--- This file is part of 'Simple-10GbE-RUDP-KCU105-Example'.
+-- This file is part of 'Simple-PGPv4-KCU105-Example'.
 -- It is subject to the license terms in the LICENSE.txt file found in the
 -- top-level directory of this distribution and at:
 --    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
--- No part of 'Simple-10GbE-RUDP-KCU105-Example', including this file,
+-- No part of 'Simple-PGPv4-KCU105-Example', including this file,
 -- may be copied, modified, propagated, or distributed except according to
 -- the terms contained in the LICENSE.txt file.
 -------------------------------------------------------------------------------
@@ -20,13 +20,12 @@ use surf.StdRtlPkg.all;
 use surf.AxiStreamPkg.all;
 use surf.AxiLitePkg.all;
 
-entity Simple10GbeRudpKcu105Example is
+entity Simple10GbePgp4Kcu105Example is
    generic (
-      TPD_G        : time             := 1 ns;
+      TPD_G        : time   := 1 ns;
       BUILD_INFO_G : BuildInfoType;
-      SIMULATION_G : boolean          := false;
-      IP_ADDR_G    : slv(31 downto 0) := x"0A02A8C0";  -- 192.168.2.10
-      DHCP_G       : boolean          := false);
+      SIMULATION_G : boolean := false;
+      RATE_G       : string  := "10.3125Gbps");  -- or "6.25Gbps" or "3.125Gbps"
    port (
       -- I2C Ports
       sfpTxDisL  : out   sl;
@@ -46,30 +45,30 @@ entity Simple10GbeRudpKcu105Example is
       flashMiso  : in    sl;
       flashHoldL : out   sl;
       flashWp    : out   sl;
-      -- ETH GT Pins
-      ethClkP    : in    sl;
-      ethClkN    : in    sl;
-      ethRxP     : in    sl;
-      ethRxN     : in    sl;
-      ethTxP     : out   sl;
-      ethTxN     : out   sl);
-end Simple10GbeRudpKcu105Example;
+      -- PGP GT Pins
+      pgpClkP    : in    sl;
+      pgpClkN    : in    sl;
+      pgpRxP     : in    sl;
+      pgpRxN     : in    sl;
+      pgpTxP     : out   sl;
+      pgpTxN     : out   sl);
+end Simple10GbePgp4Kcu105Example;
 
-architecture top_level of Simple10GbeRudpKcu105Example is
+architecture top_level of Simple10GbePgp4Kcu105Example is
 
-   signal heartbeat  : sl;
-   signal phyReady   : sl;
-   signal rssiLinkUp : slv(1 downto 0);
+   signal heartbeat   : sl;
+   signal rxlinkReady : sl;
+   signal txlinkReady : sl;
 
    -- Clock and Reset
    signal axilClk : sl;
    signal axilRst : sl;
 
    -- AXI-Stream: Stream Interface
-   signal ibRudpMaster : AxiStreamMasterType;
-   signal ibRudpSlave  : AxiStreamSlaveType;
-   signal obRudpMaster : AxiStreamMasterType;
-   signal obRudpSlave  : AxiStreamSlaveType;
+   signal ibPgpMaster : AxiStreamMasterType;
+   signal ibPgpSlave  : AxiStreamSlaveType;
+   signal obPgpMaster : AxiStreamMasterType;
+   signal obPgpSlave  : AxiStreamSlaveType;
 
    -- AXI-Lite: Register Access
    signal axilReadMaster  : AxiLiteReadMasterType;
@@ -84,9 +83,9 @@ begin
    led(5) <= heartbeat;
    led(4) <= axilRst;
    led(3) <= not(axilRst);
-   led(2) <= rssiLinkUp(1);
-   led(1) <= rssiLinkUp(0);
-   led(0) <= phyReady;
+   led(2) <= rxlinkReady;
+   led(1) <= txlinkReady;
+   led(0) <= '0';
 
    -----------------------
    -- Core Firmware Module
@@ -96,17 +95,16 @@ begin
          TPD_G        => TPD_G,
          BUILD_INFO_G => BUILD_INFO_G,
          SIMULATION_G => SIMULATION_G,
-         IP_ADDR_G    => IP_ADDR_G,
-         DHCP_G       => DHCP_G)
+         RATE_G       => RATE_G)
       port map (
          -- Clock and Reset
-         axilClk          => axilClk,
-         axilRst          => axilRst,
+         axilClk         => axilClk,
+         axilRst         => axilRst,
          -- AXI-Stream Interface
-         ibRudpMaster    => ibRudpMaster,
-         ibRudpSlave     => ibRudpSlave,
-         obRudpMaster    => obRudpMaster,
-         obRudpSlave     => obRudpSlave,
+         ibPgpMaster     => ibPgpMaster,
+         ibPgpSlave      => ibPgpSlave,
+         obPgpMaster     => obPgpMaster,
+         obPgpSlave      => obPgpSlave,
          -- AXI-Lite Interface
          axilReadMaster  => axilReadMaster,
          axilReadSlave   => axilReadSlave,
@@ -124,21 +122,21 @@ begin
          extRst          => extRst,
          emcClk          => emcClk,
          heartbeat       => heartbeat,
-         phyReady        => phyReady,
-         rssiLinkUp      => rssiLinkUp,
+         rxlinkReady     => rxlinkReady,
+         txlinkReady     => txlinkReady,
          -- Boot Memory Ports
          flashCsL        => flashCsL,
          flashMosi       => flashMosi,
          flashMiso       => flashMiso,
          flashHoldL      => flashHoldL,
          flashWp         => flashWp,
-         -- ETH GT Pins
-         ethClkP         => ethClkP,
-         ethClkN         => ethClkN,
-         ethRxP          => ethRxP,
-         ethRxN          => ethRxN,
-         ethTxP          => ethTxP,
-         ethTxN          => ethTxN);
+         -- PGP GT Pins
+         pgpClkP         => pgpClkP,
+         pgpClkN         => pgpClkN,
+         pgpRxP          => pgpRxP,
+         pgpRxN          => pgpRxN,
+         pgpTxP          => pgpTxP,
+         pgpTxN          => pgpTxN);
 
    ------------------------------
    -- Application Firmware Module
@@ -149,13 +147,13 @@ begin
          SIMULATION_G => SIMULATION_G)
       port map (
          -- Clock and Reset
-         axilClk          => axilClk,
-         axilRst          => axilRst,
+         axilClk         => axilClk,
+         axilRst         => axilRst,
          -- AXI-Stream Interface
-         ibRudpMaster    => ibRudpMaster,
-         ibRudpSlave     => ibRudpSlave,
-         obRudpMaster    => obRudpMaster,
-         obRudpSlave     => obRudpSlave,
+         ibPgpMaster     => ibPgpMaster,
+         ibPgpSlave      => ibPgpSlave,
+         obPgpMaster     => obPgpMaster,
+         obPgpSlave      => obPgpSlave,
          -- AXI-Lite Interface
          axilReadMaster  => axilReadMaster,
          axilReadSlave   => axilReadSlave,

@@ -3,11 +3,11 @@
 -------------------------------------------------------------------------------
 -- Description: Application TX Firmware Module
 -------------------------------------------------------------------------------
--- This file is part of 'Simple-10GbE-RUDP-KCU105-Example'.
+-- This file is part of 'Simple-PGPv4-KCU105-Example'.
 -- It is subject to the license terms in the LICENSE.txt file found in the
 -- top-level directory of this distribution and at:
 --    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
--- No part of 'Simple-10GbE-RUDP-KCU105-Example', including this file,
+-- No part of 'Simple-PGPv4-KCU105-Example', including this file,
 -- may be copied, modified, propagated, or distributed except according to
 -- the terms contained in the LICENSE.txt file.
 -------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ use surf.StdRtlPkg.all;
 use surf.AxiStreamPkg.all;
 use surf.AxiLitePkg.all;
 use surf.SsiPkg.all;
-use surf.RssiPkg.all;
+use surf.Pgp4Pkg.all;
 
 entity AppTx is
    generic (
@@ -69,7 +69,7 @@ architecture rtl of AppTx is
       wordCnt        => (others => '0'),
       wordMax        => (others => '0'),
       continousMode  => '0',
-      txMaster       => axiStreamMasterInit(RSSI_AXIS_CONFIG_C),
+      txMaster       => axiStreamMasterInit(PGP4_AXIS_CONFIG_C),
       axilReadSlave  => AXI_LITE_READ_SLAVE_INIT_C,
       axilWriteSlave => AXI_LITE_WRITE_SLAVE_INIT_C,
       state          => IDLE_S);
@@ -110,7 +110,7 @@ begin
 
       -- AXI Stream Flow Control
       if (txSlave.tReady = '1') then
-         v.txMaster := axiStreamMasterInit(RSSI_AXIS_CONFIG_C);
+         v.txMaster := axiStreamMasterInit(PGP4_AXIS_CONFIG_C);
       end if;
 
       case r.state is
@@ -166,7 +166,7 @@ begin
                   v.txMaster.tData(63 downto 0) := resize(r.frameCnt, 64);
 
                   -- Set the SOF bit
-                  ssiSetUserSof(RSSI_AXIS_CONFIG_C, v.txMaster, '1');
+                  ssiSetUserSof(PGP4_AXIS_CONFIG_C, v.txMaster, '1');
 
                end if;
 

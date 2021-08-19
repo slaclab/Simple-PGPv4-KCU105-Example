@@ -3,11 +3,11 @@
 -------------------------------------------------------------------------------
 -- Description: Core Firmware Module
 -------------------------------------------------------------------------------
--- This file is part of 'Simple-10GbE-RUDP-KCU105-Example'.
+-- This file is part of 'Simple-PGPv4-KCU105-Example'.
 -- It is subject to the license terms in the LICENSE.txt file found in the
 -- top-level directory of this distribution and at:
 --    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
--- No part of 'Simple-10GbE-RUDP-KCU105-Example', including this file,
+-- No part of 'Simple-PGPv4-KCU105-Example', including this file,
 -- may be copied, modified, propagated, or distributed except according to
 -- the terms contained in the LICENSE.txt file.
 -------------------------------------------------------------------------------
@@ -19,7 +19,7 @@ library surf;
 use surf.StdRtlPkg.all;
 use surf.AxiStreamPkg.all;
 use surf.AxiLitePkg.all;
-use surf.RssiPkg.all;
+use surf.Pgp4Pkg.all;
 use surf.I2cPkg.all;
 use surf.I2cMuxPkg.all;
 
@@ -28,20 +28,19 @@ use unisim.vcomponents.all;
 
 entity Core is
    generic (
-      TPD_G        : time             := 1 ns;
+      TPD_G        : time    := 1 ns;
       BUILD_INFO_G : BuildInfoType;
-      SIMULATION_G : boolean          := false;
-      IP_ADDR_G    : slv(31 downto 0) := x"0A02A8C0";  -- 192.168.2.10
-      DHCP_G       : boolean          := false);
+      SIMULATION_G : boolean := false;
+      RATE_G       : string  := "10.3125Gbps");  -- or "6.25Gbps" or "3.125Gbps"
    port (
       -- Clock and Reset
       axilClk         : out   sl;
       axilRst         : out   sl;
       -- AXI-Stream Interface
-      ibRudpMaster    : in    AxiStreamMasterType;
-      ibRudpSlave     : out   AxiStreamSlaveType;
-      obRudpMaster    : out   AxiStreamMasterType;
-      obRudpSlave     : in    AxiStreamSlaveType;
+      ibPgpMaster     : in    AxiStreamMasterType;
+      ibPgpSlave      : out   AxiStreamSlaveType;
+      obPgpMaster     : out   AxiStreamMasterType;
+      obPgpSlave      : in    AxiStreamSlaveType;
       -- AXI-Lite Interface
       axilReadMaster  : out   AxiLiteReadMasterType;
       axilReadSlave   : in    AxiLiteReadSlaveType;
@@ -59,21 +58,21 @@ entity Core is
       extRst          : in    sl;
       emcClk          : in    sl;
       heartbeat       : out   sl;
-      phyReady        : out   sl;
-      rssiLinkUp      : out   slv(1 downto 0);
+      rxlinkReady     : out   sl;
+      txlinkReady     : out   sl;
       -- Boot Memory Ports
       flashCsL        : out   sl;
       flashMosi       : out   sl;
       flashMiso       : in    sl;
       flashHoldL      : out   sl;
       flashWp         : out   sl;
-      -- ETH GT Pins
-      ethClkP         : in    sl;
-      ethClkN         : in    sl;
-      ethRxP          : in    sl;
-      ethRxN          : in    sl;
-      ethTxP          : out   sl;
-      ethTxN          : out   sl);
+      -- PGP GT Pins
+      pgpClkP         : in    sl;
+      pgpClkN         : in    sl;
+      pgpRxP          : in    sl;
+      pgpRxN          : in    sl;
+      pgpTxP          : out   sl;
+      pgpTxN          : out   sl);
 end Core;
 
 architecture mapping of Core is
@@ -81,7 +80,7 @@ architecture mapping of Core is
    constant VERSION_INDEX_C : natural := 0;
    constant SYS_MON_INDEX_C : natural := 1;
    constant PROM_INDEX_C    : natural := 2;  -- 2:3
-   constant ETH_INDEX_C     : natural := 4;
+   constant PGP_INDEX_C     : natural := 4;
    constant I2C_INDEX_C     : natural := 5;
    constant APP_INDEX_C     : natural := 6;
 
@@ -92,7 +91,7 @@ architecture mapping of Core is
       SYS_MON_INDEX_C => (baseAddr => x"0001_0000", addrBits => 16, connectivity => x"FFFF"),
       PROM_INDEX_C+0  => (baseAddr => x"0002_0000", addrBits => 16, connectivity => x"FFFF"),
       PROM_INDEX_C+1  => (baseAddr => x"0003_0000", addrBits => 16, connectivity => x"FFFF"),
-      ETH_INDEX_C     => (baseAddr => x"0010_0000", addrBits => 20, connectivity => x"FFFF"),
+      PGP_INDEX_C     => (baseAddr => x"0010_0000", addrBits => 20, connectivity => x"FFFF"),
       I2C_INDEX_C     => (baseAddr => x"0020_0000", addrBits => 20, connectivity => x"FFFF"),
       APP_INDEX_C     => (baseAddr => x"8000_0000", addrBits => 31, connectivity => x"FFFF"));
 
@@ -172,86 +171,46 @@ begin
          rst => rst,
          o   => Heartbeat);
 
-   GEN_ETH : if (SIMULATION_G = false) generate
-
-      U_Rudp : entity work.Rudp
-         generic map (
-            TPD_G            => TPD_G,
-            IP_ADDR_G        => IP_ADDR_G,
-            DHCP_G           => DHCP_G,
-            AXIL_BASE_ADDR_G => XBAR_CONFIG_C(ETH_INDEX_C).baseAddr)
-         port map (
-            -- System Ports
-            extRst           => extRst,
-            -- Ethernet Status
-            phyReady         => phyReady,
-            rssiLinkUp       => rssiLinkUp,
-            -- Clock and Reset
-            axilClk          => clk,
-            axilRst          => rst,
-            -- AXI-Stream Interface
-            ibRudpMaster     => ibRudpMaster,
-            ibRudpSlave      => ibRudpSlave,
-            obRudpMaster     => obRudpMaster,
-            obRudpSlave      => obRudpSlave,
-            -- Master AXI-Lite Interface
-            mAxilReadMaster  => mAxilReadMaster,
-            mAxilReadSlave   => mAxilReadSlave,
-            mAxilWriteMaster => mAxilWriteMaster,
-            mAxilWriteSlave  => mAxilWriteSlave,
-            -- Slave AXI-Lite Interfaces
-            sAxilReadMaster  => axilReadMasters(ETH_INDEX_C),
-            sAxilReadSlave   => axilReadSlaves(ETH_INDEX_C),
-            sAxilWriteMaster => axilWriteMasters(ETH_INDEX_C),
-            sAxilWriteSlave  => axilWriteSlaves(ETH_INDEX_C),
-            -- ETH GT Pins
-            ethClkP          => ethClkP,
-            ethClkN          => ethClkN,
-            ethRxP           => ethRxP,
-            ethRxN           => ethRxN,
-            ethTxP           => ethTxP,
-            ethTxN           => ethTxN);
-
-   end generate;
-
-   GEN_ROGUE_TCP : if (SIMULATION_G = true) generate
-
-      U_ClkRst : entity surf.ClkRst
-         generic map (
-            CLK_PERIOD_G      => 6.4 ns,
-            RST_START_DELAY_G => 0 ns,
-            RST_HOLD_TIME_G   => 1 us)
-         port map (
-            clkP => clk,
-            rst  => rst);
-
-      U_TcpToAxiLite : entity surf.RogueTcpMemoryWrap
-         generic map (
-            TPD_G      => TPD_G,
-            PORT_NUM_G => 10000)        -- TCP Ports [10000,10001]
-         port map (
-            axilClk         => clk,
-            axilRst         => rst,
-            axilReadMaster  => mAxilReadMaster,
-            axilReadSlave   => mAxilReadSlave,
-            axilWriteMaster => mAxilWriteMaster,
-            axilWriteSlave  => mAxilWriteSlave);
-
-      U_TcpToAxiStream : entity surf.RogueTcpStreamWrap
-         generic map (
-            TPD_G         => TPD_G,
-            PORT_NUM_G    => 10002,     -- TCP Ports [10002,10003]
-            SSI_EN_G      => true,
-            AXIS_CONFIG_G => RSSI_AXIS_CONFIG_C)
-         port map (
-            axisClk     => clk,
-            axisRst     => rst,
-            sAxisMaster => ibRudpMaster,
-            sAxisSlave  => ibRudpSlave,
-            mAxisMaster => obRudpMaster,
-            mAxisSlave  => obRudpSlave);
-
-   end generate;
+   -------------
+   -- PGP Module
+   -------------
+   U_Pgp : entity work.Pgp
+      generic map (
+         TPD_G            => TPD_G,
+         SIMULATION_G     => SIMULATION_G,
+         RATE_G           => RATE_G,
+         AXIL_BASE_ADDR_G => XBAR_CONFIG_C(PGP_INDEX_C).baseAddr)
+      port map (
+         -- System Ports
+         extRst           => extRst,
+         -- PGP Link Status
+         rxlinkReady      => rxlinkReady,
+         txlinkReady      => txlinkReady,
+         -- Clock and Reset
+         axilClk          => clk,
+         axilRst          => rst,
+         -- AXI-Stream Interface
+         ibPgpMaster      => ibPgpMaster,
+         ibPgpSlave       => ibPgpSlave,
+         obPgpMaster      => obPgpMaster,
+         obPgpSlave       => obPgpSlave,
+         -- Master AXI-Lite Interface
+         mAxilReadMaster  => mAxilReadMaster,
+         mAxilReadSlave   => mAxilReadSlave,
+         mAxilWriteMaster => mAxilWriteMaster,
+         mAxilWriteSlave  => mAxilWriteSlave,
+         -- Slave AXI-Lite Interfaces
+         sAxilReadMaster  => axilReadMasters(PGP_INDEX_C),
+         sAxilReadSlave   => axilReadSlaves(PGP_INDEX_C),
+         sAxilWriteMaster => axilWriteMasters(PGP_INDEX_C),
+         sAxilWriteSlave  => axilWriteSlaves(PGP_INDEX_C),
+         -- PGP GT Pins
+         pgpClkP          => pgpClkP,
+         pgpClkN          => pgpClkN,
+         pgpRxP           => pgpRxP,
+         pgpRxN           => pgpRxN,
+         pgpTxP           => pgpTxP,
+         pgpTxN           => pgpTxN);
 
    ---------------------------
    -- AXI-Lite Crossbar Module

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 #-----------------------------------------------------------------------------
-# This file is part of the 'Simple-10GbE-RUDP-KCU105-Example'. It is subject to
+# This file is part of the 'Simple-PGPv4-KCU105-Example'. It is subject to
 # the license terms in the LICENSE.txt file found in the top-level directory
 # of this distribution and at:
 #    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
-# No part of the 'Simple-10GbE-RUDP-KCU105-Example', including this file, may be
+# No part of the 'Simple-PGPv4-KCU105-Example', including this file, may be
 # copied, modified, propagated, or distributed except according to the terms
 # contained in the LICENSE.txt file.
 #-----------------------------------------------------------------------------
@@ -17,7 +17,7 @@ import argparse
 import pyrogue as pr
 import pyrogue.pydm
 
-import simple_10gbe_rudp_kcu105_example as devBoard
+import simple_pgp4_kcu105_example as devBoard
 
 #################################################################
 
@@ -31,11 +31,11 @@ if __name__ == "__main__":
 
     # Add arguments
     parser.add_argument(
-        "--ip",
+        "--dev",
         type     = str,
         required = False,
-        default  = '192.168.2.10',
-        help     = "IP address",
+        default  = '/dev/datadev_0',
+        help     = "axi-pcie-core device",
     )
 
     parser.add_argument(
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     #################################################################
 
     with devBoard.Root(
-        ip         = args.ip,
+        dev        = args.dev,
         pollEn     = args.pollEn,
         initRead   = args.initRead,
         serverPort = args.serverPort,

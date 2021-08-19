@@ -3,11 +3,11 @@
 -------------------------------------------------------------------------------
 -- Description: Application Firmware Module
 -------------------------------------------------------------------------------
--- This file is part of 'Simple-10GbE-RUDP-KCU105-Example'.
+-- This file is part of 'Simple-PGPv4-KCU105-Example'.
 -- It is subject to the license terms in the LICENSE.txt file found in the
 -- top-level directory of this distribution and at:
 --    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
--- No part of 'Simple-10GbE-RUDP-KCU105-Example', including this file,
+-- No part of 'Simple-PGPv4-KCU105-Example', including this file,
 -- may be copied, modified, propagated, or distributed except according to
 -- the terms contained in the LICENSE.txt file.
 -------------------------------------------------------------------------------
@@ -29,10 +29,10 @@ entity App is
       axilClk         : in  sl;
       axilRst         : in  sl;
       -- AXI-Stream Interface
-      ibRudpMaster    : out AxiStreamMasterType;
-      ibRudpSlave     : in  AxiStreamSlaveType;
-      obRudpMaster    : in  AxiStreamMasterType;
-      obRudpSlave     : out AxiStreamSlaveType;
+      ibPgpMaster    : out AxiStreamMasterType;
+      ibPgpSlave     : in  AxiStreamSlaveType;
+      obPgpMaster    : in  AxiStreamMasterType;
+      obPgpSlave     : out AxiStreamSlaveType;
       -- AXI-Lite Interface
       axilReadMaster  : in  AxiLiteReadMasterType;
       axilReadSlave   : out AxiLiteReadSlaveType;
@@ -59,7 +59,7 @@ begin
    -------------------------------
    -- Terminating unused RX stream
    -------------------------------
-   obRudpSlave <= AXI_STREAM_SLAVE_FORCE_C;
+   obPgpSlave <= AXI_STREAM_SLAVE_FORCE_C;
 
    ---------------------------
    -- AXI-Lite Crossbar Module
@@ -94,8 +94,8 @@ begin
          axilClk         => axilClk,
          axilRst         => axilRst,
          -- AXI-Stream Interface
-         txMaster        => ibRudpMaster,
-         txSlave         => ibRudpSlave,
+         txMaster        => ibPgpMaster,
+         txSlave         => ibPgpSlave,
          -- AXI-Lite Interface
          axilReadMaster  => axilReadMasters(TX_INDEX_C),
          axilReadSlave   => axilReadSlaves(TX_INDEX_C),

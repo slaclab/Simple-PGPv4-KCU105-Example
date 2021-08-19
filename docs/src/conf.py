@@ -59,7 +59,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'Simple-10GbE-RUDP-KCU105-Example'
+project = 'Simple-PGPv4-KCU105-Example'
 copyright = '2021, SLAC National Accelerator Laboratory'
 author = 'SLAC TID-ID-ES'
 
@@ -175,8 +175,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Simple-10GbE-RUDP-KCU105-Example', 'Simple-10GbE-RUDP-KCU105-Example Documentation',
-     author, 'Simple-10GbE-RUDP-KCU105-Example', 'One line description of project.',
+    (master_doc, 'Simple-PGPv4-KCU105-Example', 'Simple-10GbE-RUDP-KCU105-Example Documentation',
+     author, 'Simple-PGPv4-KCU105-Example', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -184,6 +184,6 @@ texinfo_documents = [
 intersphinx_mapping = {'https://docs.python.org/': None}
 
 # Breath configuration
-breathe_projects = { 'Simple-10GbE-RUDP-KCU105-Example' : '../build/doxyxml' }
-breathe_default_project = 'Simple-10GbE-RUDP-KCU105-Example'
+breathe_projects = { 'Simple-PGPv4-KCU105-Example' : '../build/doxyxml' }
+breathe_default_project = 'Simple-PGPv4-KCU105-Example'
 
