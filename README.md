@@ -1,5 +1,5 @@
-# Simple-10GbE-RUDP-KCU105-Example
+Simple-PGPv4-KCU105-Example
 
 Documentation is posted here:
 
-https://slaclab.github.io/Simple-10GbE-RUDP-KCU105-Example/
+https://slaclab.github.io/Simple-PGPv4-KCU105-Example/
