@@ -22,6 +22,7 @@ import simple_pgp4_kcu105_example as devBoard
 class Root(pr.Root):
     def __init__(   self,
             dev      = '/dev/datadev_0',
+            lane     = 0,
             pollEn   = True,  # Enable automatic polling registers
             initRead = True,  # Read all registers at start of the system
             promProg = False, # Flag to disable all devices not related to PROM programming
@@ -57,7 +58,7 @@ class Root(pr.Root):
 
             # Map the DMA streams
             for vc in range(4):
-                self.dmaStream[vc] = rogue.hardware.axi.AxiStreamDma(dev,vc,1)
+                self.dmaStream[vc] = rogue.hardware.axi.AxiStreamDma(dev,(0x100*lane)+vc,1)
 
         else:
 
@@ -95,6 +96,15 @@ class Root(pr.Root):
 
             # Also connect dmaStream[VC=1] to data writer
             self.dmaStream[1] >> self.dataWriter.getChannel(0)
+
+        #################################################################
+
+        # Create (Xilinx Virtual Cable) XVC UDP server on localhost
+        # self.xvc  = rogue.protocols.udp.Server(2542,False) # Server(port,jumbo)
+        self.xvc  = rogue.protocols.udp.Server(2542,True) # Change jumbo to false after https://github.com/slaclab/rogue/pull/795
+
+        # Connect dmaStream[VC=2] to XVC UDP server
+        self.dmaStream[2] == self.xvc
 
         #################################################################
 

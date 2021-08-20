@@ -38,13 +38,21 @@ if __name__ == "__main__":
         help     = "axi-pcie-core device",
     )
 
+    parser.add_argument(
+        "--lane",
+        type     = int,
+        required = False,
+        default  = 0,
+        help     = "DMA Lane Index",
+    )
+
     # Get the arguments
     args = parser.parse_args()
 
     #################################################################
 
     # Set base
-    root = devBoard.Root(dev = args.dev)
+    root = devBoard.Root(dev = args.dev, lane = args.lane)
 
     # Start the system
     root.start()

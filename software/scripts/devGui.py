@@ -39,6 +39,14 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
+        "--lane",
+        type     = int,
+        required = False,
+        default  = 0,
+        help     = "DMA Lane Index",
+    )
+
+    parser.add_argument(
         "--pollEn",
         type     = argBool,
         required = False,
@@ -77,6 +85,7 @@ if __name__ == "__main__":
 
     with devBoard.Root(
         dev        = args.dev,
+        lane       = args.lane,
         pollEn     = args.pollEn,
         initRead   = args.initRead,
         serverPort = args.serverPort,
