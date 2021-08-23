@@ -12,6 +12,6 @@ This section describes hardware/firmware/software setup requirements and procedu
 
    cloning
    hardware_setup
-   network_setup
+   pcie_setup
    vivado_setup
    rogue_setup

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>How to use Xilinx Virtual Cable (XVC) with ILA &mdash; Simple-10GbE-RUDP-KCU105-Example v1.1.4-3-g193694e documentation</title>
+  <title>How to use Xilinx Virtual Cable (XVC) with ILA &mdash; Simple-PGPv4-KCU105-Example 974db8a documentation</title>
   
 
   
@@ -56,7 +56,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Simple-10GbE-RUDP-KCU105-Example
+            <a href="../index.html" class="icon icon-home"> Simple-PGPv4-KCU105-Example
           
 
           
@@ -120,7 +120,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Simple-10GbE-RUDP-KCU105-Example</a>
+          <a href="../index.html">Simple-PGPv4-KCU105-Example</a>
         
       </nav>
 
@@ -177,9 +177,9 @@
   <div class="section" id="how-to-use-xilinx-virtual-cable-xvc-with-ila">
 <span id="how-to-remote-debug"></span><h1>How to use Xilinx Virtual Cable (XVC) with ILA<a class="headerlink" href="#how-to-use-xilinx-virtual-cable-xvc-with-ila" title="Permalink to this headline">¶</a></h1>
 <p>The Xilinx Virtual Cable (XVC) lets you remotely access the ILA
-(A.K.A. <code class="docutils literal notranslate"><span class="pre">Chipscope</span></code>) via the KCU105 Ethernet (instead of using JTAG).
+(A.K.A. <code class="docutils literal notranslate"><span class="pre">Chipscope</span></code>) via the KCU105 PGP (instead of using JTAG).
 The XVC will let you view and interact with ILA remotely via
-the same Ethernet link that you use for register access
+the same PGP link that you use for register access
 and data streaming.</p>
 <p>However, XVC does <strong>NOT</strong> support non-ILA debugging operations:</p>
 <ul class="simple">
@@ -199,34 +199,50 @@ and set <code class="docutils literal notranslate"><span class="pre">USE_XVC_DEB
 </pre></div>
 </div>
 </div></blockquote>
-<p>In the firmware, you will to map  UDP server port=2542 to
-the <code class="docutils literal notranslate"><span class="pre">surf.UdpDebugBridgeWrapper</span></code>:</p>
+<p>In this firmware example, the <code class="docutils literal notranslate"><span class="pre">surf.UdpDebugBridgeWrapper</span></code> is mapped to Virtual Channel (VC) 2:</p>
 <blockquote>
 <div><div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="n">U_XVC</span> <span class="o">:</span> <span class="k">entity</span> <span class="nc">surf</span><span class="p">.</span><span class="n">UdpDebugBridgeWrapper</span>
    <span class="k">generic</span> <span class="k">map</span> <span class="p">(</span>
       <span class="n">TPD_G</span> <span class="o">=&gt;</span> <span class="n">TPD_G</span><span class="p">)</span>
    <span class="k">port</span> <span class="k">map</span> <span class="p">(</span>
       <span class="c1">-- Clock and Reset</span>
-      <span class="n">clk</span>            <span class="o">=&gt;</span> <span class="n">ethClk</span><span class="p">,</span>
-      <span class="n">rst</span>            <span class="o">=&gt;</span> <span class="n">ethRst</span><span class="p">,</span>
+      <span class="n">clk</span>            <span class="o">=&gt;</span> <span class="n">axilClock</span><span class="p">,</span>
+      <span class="n">rst</span>            <span class="o">=&gt;</span> <span class="n">axilReset</span><span class="p">,</span>
       <span class="c1">-- UDP XVC Interface</span>
-      <span class="n">obServerMaster</span> <span class="o">=&gt;</span> <span class="n">obServerMasters</span><span class="p">(</span><span class="n">UDP_SRV_XVC_IDX_C</span><span class="p">),</span>
-      <span class="n">obServerSlave</span>  <span class="o">=&gt;</span> <span class="n">obServerSlaves</span><span class="p">(</span><span class="n">UDP_SRV_XVC_IDX_C</span><span class="p">),</span>
-      <span class="n">ibServerMaster</span> <span class="o">=&gt;</span> <span class="n">ibServerMasters</span><span class="p">(</span><span class="n">UDP_SRV_XVC_IDX_C</span><span class="p">),</span>
-      <span class="n">ibServerSlave</span>  <span class="o">=&gt;</span> <span class="n">ibServerSlaves</span><span class="p">(</span><span class="n">UDP_SRV_XVC_IDX_C</span><span class="p">));</span>
+      <span class="n">obServerMaster</span> <span class="o">=&gt;</span> <span class="n">ibXvcMaster</span><span class="p">,</span>
+      <span class="n">obServerSlave</span>  <span class="o">=&gt;</span> <span class="n">ibXvcSlave</span><span class="p">,</span>
+      <span class="n">ibServerMaster</span> <span class="o">=&gt;</span> <span class="n">obXvcMaster</span><span class="p">,</span>
+      <span class="n">ibServerSlave</span>  <span class="o">=&gt;</span> <span class="n">obXvcSlave</span><span class="p">);</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In python rogue, VC[2] is mapped to UDP server:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create (Xilinx Virtual Cable) XVC UDP server on localhost</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">xvc</span>  <span class="o">=</span> <span class="n">rogue</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="mi">2542</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Server(port,jumbo)</span>
+
+<span class="c1"># Connect dmaStream[VC=2] to XVC UDP server</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">dmaStream</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvc</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Next you will start up the rogue software, which will setup the UDP bridge to XVC.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software
+$ python scripts/devGui.py
 </pre></div>
 </div>
 </div></blockquote>
 <p>Next you will build the XVC source:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-10GbE-RUDP-KCU105-Example/software/xvcSrv/src
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software/xvcSrv/src
 $ make
 </pre></div>
 </div>
 </div></blockquote>
 <p>Next you will connect execute the <code class="docutils literal notranslate"><span class="pre">./xvcSrv</span> <span class="pre">-t</span> <span class="pre">&lt;fw_ip_address&gt;:&lt;udp_server_port&gt;</span></code> command:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./xvcSrv -t <span class="m">192</span>.168.2.10:2542
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./xvcSrv -t localhost:2542
 </pre></div>
 </div>
 </div></blockquote>

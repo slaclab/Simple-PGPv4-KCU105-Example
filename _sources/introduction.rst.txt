@@ -16,19 +16,16 @@ The **AXI-Lite** bus is used for register access.
 
 (refer to https://developer.arm.com/documentation/ihi0022/e/)
 
-The **AXI stream** bus to transfer ASYNC messages to/from the RUDP module
+The **AXI stream** bus to transfer ASYNC messages to/from the PGP module
 
 (refer to https://developer.arm.com/documentation/ihi0051/a/Introduction/About-the-AXI4-Stream-protocol)
 
 Inside the application block includes a **AppTx** module.
 This module is an example of how to produce data on the **AXI stream** bus.
-This **AXI steam** bus is connected to the **Core** and routed to the **RUDP** module.
-The **RUDP** module contains all the Ethernet layers (PHY/MAC/IPv4/UDP/ReliableLayer).
-For the Reliable Layer, we are using are using Reliable SLAC Streaming Protocol (RSSI)
-(refer to https://confluence.slac.stanford.edu/x/1IyfD).
-UdpEngineWrapper module contains the IPv4 and UDP layers.
-TenGigEth module contains the PHY and MAC layers.
-A block diagram on this stream path from the Application's **AppTx** module to the PHY layer is shown below:
+This **AXI steam** bus is connected to the **Core** and routed to the **PGP** module.
+(refer to https://confluence.slac.stanford.edu/x/1dzgEQ for more information about PGPv4).
+
+A block diagram on this stream path from the Application's **AppTx** module to the PGP is shown below:
 
    .. image:: ../images/fileio_DataStreamFlow.png
      :width: 800

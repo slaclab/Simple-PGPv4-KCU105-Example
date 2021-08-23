@@ -18,7 +18,7 @@ A **releases.yaml** file is used to define the location of all the firmware/soft
 and files that will be included in the tag release via the ruckus script.  Here is where this
 YAML file is located for this project:
 
-https://github.com/slaclab/Simple-10GbE-RUDP-KCU105-Example/blob/main/firmware/releases.yaml
+https://github.com/slaclab/Simple-PGPv4-KCU105-Example/blob/main/firmware/releases.yaml
 
 How to create a tag release
 ===========================
@@ -29,7 +29,7 @@ How to create a tag release
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/firmware/targets/Simple10GbeRudpKcu105Example
+      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/Simple10GbePgp4Kcu105Example
 
 #. Optional: build only the release files without doing a tag
 

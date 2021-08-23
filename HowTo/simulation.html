@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>How to run the Software Development GUI with VCS firmware simulator &mdash; Simple-10GbE-RUDP-KCU105-Example v1.1.4-3-g193694e documentation</title>
+  <title>How to run the Software Development GUI with VCS firmware simulator &mdash; Simple-PGPv4-KCU105-Example 974db8a documentation</title>
   
 
   
@@ -56,7 +56,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home"> Simple-10GbE-RUDP-KCU105-Example
+            <a href="../index.html" class="icon icon-home"> Simple-PGPv4-KCU105-Example
           
 
           
@@ -124,7 +124,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Simple-10GbE-RUDP-KCU105-Example</a>
+          <a href="../index.html">Simple-PGPv4-KCU105-Example</a>
         
       </nav>
 
@@ -188,13 +188,13 @@
 <ol class="arabic">
 <li><p>Setup Vivado and VCS (refer to <a class="reference internal" href="../Setup/vivado_setup.html#setup-vivado-setup"><span class="std std-ref">Vivado and VCS Setup</span></a>)</p></li>
 <li><p>Go to the target directory and execute the <cite>vcs</cite> build</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-10GbE-RUDP-KCU105-Example/firmware/targets/Simple10GbeRudpKcu105Example
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/firmware/targets/Simple10GbePgp4Kcu105Example
 $ make vcs
 </pre></div>
 </div>
 </li>
 <li><p>Go to the VCS build output</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ../../build/Simple10GbeRudpKcu105Example/Simple10GbeRudpKcu105Example_project.sim/sim_1/behav/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ../../build/Simple10GbePgp4Kcu105Example/Simple10GbePgp4Kcu105Example_project.sim/sim_1/behav/
 </pre></div>
 </div>
 </li>
@@ -222,9 +222,9 @@ $ make vcs
 <h2>In the Second terminal<a class="headerlink" href="#in-the-second-terminal" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
 <li><p>Setup rogue software (refer to <a class="reference internal" href="../Setup/rogue_setup.html#setup-rogue-setup"><span class="std std-ref">Rogue Software Setup</span></a>)</p></li>
-<li><p>run the Development GUI python script with <strong>–ip sim</strong> argument</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-10GbE-RUDP-KCU105-Example/software
-$ python scripts/devGui.py --ip sim
+<li><p>run the Development GUI python script with <strong>–dev sim</strong> argument</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software
+$ python scripts/devGui.py --dev sim
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/cosimGui.png"><img alt="Alternative text" src="../_images/cosimGui.png" style="width: 800px;" /></a>

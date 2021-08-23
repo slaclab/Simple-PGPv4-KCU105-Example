@@ -4,11 +4,11 @@
 How to reprogram your KCU105 board's QSPI Boot Prom
 ===================================================
 
-#. The KCU105 **MUST** have a version of the Simple10GbeRudpKcu105Example firmware loaded. If first time to program KCU105 with Simple10GbeRudpKcu105Example, then use the JTAG and load the .bit file into the FPGA.
+#. The KCU105 **MUST** have a version of the Simple10GbePgp4Kcu105Example firmware loaded. If first time to program KCU105 with Simple10GbePgp4Kcu105Example, then use the JTAG and load the .bit file into the FPGA.
 
 #. Make sure SW15 is setup for QSPI booting (refer to :ref:`setup_hardware_setup`)
 
-#. Build the firmware (refer to :ref:`how_to_build_firmware`) to that there is .MCS files in the "targets/Simple10GbeRudpKcu105Example/images" directory.
+#. Build the firmware (refer to :ref:`how_to_build_firmware`) to that there is .MCS files in the "targets/Simple10GbePgp4Kcu105Example/images" directory.
 
 #. Setup rogue software (refer to :ref:`setup_rogue_setup`)
 
@@ -22,7 +22,7 @@ How to reprogram your KCU105 board's QSPI Boot Prom
 
    .. code-block::
 
-      $ python scripts/updateBootProm.py --path ../firmware/targets/Simple10GbeRudpKcu105Example/images/
+      $ python scripts/updateBootProm.py --path ../firmware/targets/Simple10GbePgp4Kcu105Example/images/
       Rogue/pyrogue version v5.8.0. https://github.com/slaclab/rogue
       Start: Started zmqServer on ports 9107-9109
       Root.Core.AxiVersion count reset called
@@ -34,15 +34,15 @@ How to reprogram your KCU105 board's QSPI Boot Prom
       UpTime       = 16:32:03
       GitHash      = dirty (uncommitted code)
       XilinxDnaId  = 0x4002000100f1cd4544618485
-      FwTarget     = Simple10GbeRudpKcu105Example
+      FwTarget     = Simple10GbePgp4Kcu105Example
       BuildEnv     = Vivado v2021.1
       BuildServer  = rdsrv307 (Ubuntu 20.04.2 LTS)
       BuildDate    = Thu 15 Jul 2021 01:44:36 PM PDT
       Builder      = ruckman
-      0 : ../firmware/targets/Simple10GbeRudpKcu105Example/images/Simple10GbeRudpKcu105Example-0x01000000-20210715134436-ruckman-dirty
-      1 : ../firmware/targets/Simple10GbeRudpKcu105Example/images/Simple10GbeRudpKcu105Example-0x01000000-20210716121151-ruckman-50550dd
+      0 : ../firmware/targets/Simple10GbePgp4Kcu105Example/images/Simple10GbePgp4Kcu105Example-0x01000000-20210715134436-ruckman-dirty
+      1 : ../firmware/targets/Simple10GbePgp4Kcu105Example/images/Simple10GbePgp4Kcu105Example-0x01000000-20210716121151-ruckman-50550dd
       Enter image to program into the PCIe card's PROM: 1
-      Root.Core.AxiMicronN25Q[0].LoadMcsFile: ../firmware/targets/Simple10GbeRudpKcu105Example/images/Simple10GbeRudpKcu105Example-0x01000000-20210716121151-ruckman-50550dd_primary.mcs.gz
+      Root.Core.AxiMicronN25Q[0].LoadMcsFile: ../firmware/targets/Simple10GbePgp4Kcu105Example/images/Simple10GbePgp4Kcu105Example-0x01000000-20210716121151-ruckman-50550dd_primary.mcs.gz
       PROM Manufacturer ID Code  = 0x20
       PROM Manufacturer Type     = 0xbb
       PROM Manufacturer Capacity = 0x19
@@ -64,7 +64,7 @@ How to reprogram your KCU105 board's QSPI Boot Prom
                   ***************************************************
 
 
-      Root.Core.AxiMicronN25Q[1].LoadMcsFile: ../firmware/targets/Simple10GbeRudpKcu105Example/images/Simple10GbeRudpKcu105Example-0x01000000-20210716121151-ruckman-50550dd_secondary.mcs.gz
+      Root.Core.AxiMicronN25Q[1].LoadMcsFile: ../firmware/targets/Simple10GbePgp4Kcu105Example/images/Simple10GbePgp4Kcu105Example-0x01000000-20210716121151-ruckman-50550dd_secondary.mcs.gz
       PROM Manufacturer ID Code  = 0x20
       PROM Manufacturer Type     = 0xbb
       PROM Manufacturer Capacity = 0x19
@@ -98,7 +98,7 @@ How to reprogram your KCU105 board's QSPI Boot Prom
       UpTime       = 0:00:04
       GitHash      = 0x50550dd2881fed3f48af0ca0db8a78da9f3e2363
       XilinxDnaId  = 0x4002000100f1cd4544618485
-      FwTarget     = Simple10GbeRudpKcu105Example
+      FwTarget     = Simple10GbePgp4Kcu105Example
       BuildEnv     = Vivado v2021.1
       BuildServer  = rdsrv307 (Ubuntu 20.04.2 LTS)
       BuildDate    = Fri 16 Jul 2021 12:11:51 PM PDT
