@@ -342,8 +342,8 @@ begin
          axisRst                 => pgpRst,
          axisMasters(3 downto 0) => pgpTxMasters,
          axisMasters(7 downto 4) => pgpRxMasters,
-         axisSlaves(3 downto 0)  => pgpRxSlaves,
-         axisSlaves(7 downto 4)  => pgpTxSlaves,
+         axisSlaves(3 downto 0)  => pgpTxSlaves,
+         axisSlaves(7 downto 4)  => pgpRxSlaves,
          -- AXI lite slave port for register access
          axilClk                 => axilClock,
          axilRst                 => axilReset,

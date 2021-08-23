@@ -10,7 +10,7 @@ How to run the Software in Interactive Mode
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software
+      $ cd Simple-PGPv4-KCU105-Example/software
       $ ipython -i -- scripts/interactive.py
       Python 3.7.10 | packaged by conda-forge | (default, Feb 19 2021, 16:07:37)
       Type 'copyright', 'credits' or 'license' for more information
@@ -26,7 +26,7 @@ How to run the Software in Interactive Mode
       UpTime       = 8 days, 22:45:50
       GitHash      = 0xa75a5f55b0ea87cb5b66f1ea1bff12272ae1bc73
       XilinxDnaId  = 0x4002000100fa6901008125c1
-      FwTarget     = Simple10GbeRudpKcu105Example
+      FwTarget     = Simple10GbePgp4Kcu105Example
       BuildEnv     = Vivado v2021.1
       BuildServer  = rdsrv303 (Ubuntu 20.04.2 LTS)
       BuildDate    = Mon 19 Jul 2021 08:42:18 AM PDT

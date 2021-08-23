@@ -10,7 +10,7 @@ How to run the Software Development GUI with KCU105 Hardware
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software
+      $ cd Simple-PGPv4-KCU105-Example/software
       $ python scripts/devGui.py
 
    .. image:: ../../images/devGui.png

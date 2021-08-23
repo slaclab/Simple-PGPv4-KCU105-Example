@@ -50,7 +50,7 @@ Next you will build the XVC source:
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software/xvcSrv/src
+      $ cd Simple-PGPv4-KCU105-Example/software/xvcSrv/src
       $ make
 
 Next you will connect execute the ``./xvcSrv -t <fw_ip_address>:<udp_server_port>`` command:

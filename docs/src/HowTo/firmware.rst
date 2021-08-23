@@ -11,7 +11,7 @@ How to build the firmware
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/firmware/targets/Simple10GbeRudpKcu105Example
+      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/Simple10GbePgp4Kcu105Example
       $ make
 
 

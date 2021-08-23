@@ -21,7 +21,7 @@ How to get access with another client if PyDM GUI already open
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software
+      $ cd Simple-PGPv4-KCU105-Example/software
       $ python scripts/zmqClientGui.py
 
    .. image:: ../../images/zmqClientGui.png
@@ -39,7 +39,7 @@ How to create a ZMQ server without PyDM GUI in one terminal and ZMQ client with 
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software
+      $ cd Simple-PGPv4-KCU105-Example/software
       $ python scripts/devGui.py --guiType None
 
 * For the second terminal:
@@ -48,7 +48,7 @@ How to create a ZMQ server without PyDM GUI in one terminal and ZMQ client with 
 
    .. code-block:: bash
 
-      $ cd Simple-10GbE-RUDP-KCU105-Example/software
+      $ cd Simple-PGPv4-KCU105-Example/software
       $ python scripts/zmqClientGui.py
 
    .. image:: ../../images/devGui.png

@@ -11,7 +11,7 @@ Here's how to setup the Xilinx tools and licensing
 
 .. code-block:: bash
 
-  $ source Simple-10GbE-RUDP-KCU105-Example/firmware/setup_env_slac.sh
+  $ source Simple-PGPv4-KCU105-Example/firmware/setup_env_slac.sh
 
 This **setup_env_slac.sh** also includes the setup for VCS as well
 
