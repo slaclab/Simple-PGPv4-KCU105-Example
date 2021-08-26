@@ -22,7 +22,7 @@ Targets:
       - ltx
 
 Releases:
-  all:
+  simple_pgp4_kcu105_example:
     Primary: True
     Targets:
       - Simple10GbePgp4Kcu105Example
