@@ -99,11 +99,10 @@ class Root(pr.Root):
 
         #################################################################
 
-        # Create (Xilinx Virtual Cable) XVC UDP server on localhost
-        # self.xvc  = rogue.protocols.udp.Server(2542,False) # Server(port,jumbo)
-        self.xvc  = rogue.protocols.udp.Server(2542,True) # Change jumbo to false after https://github.com/slaclab/rogue/pull/795
-
-        # Connect dmaStream[VC=2] to XVC UDP server
+        # Create (Xilinx Virtual Cable) XVC
+        self.xvc = rogue.protocols.xilinx.Xvc(ip, 2542, 'stream') #Server(host, port, driver)
+        
+        # Connect dmaStream[VC=2] to XVC
         self.dmaStream[2] == self.xvc
 
         #################################################################
