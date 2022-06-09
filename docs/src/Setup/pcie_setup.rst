@@ -34,4 +34,4 @@ Here's how to clone/build/load this driver:
    $ sudo chmod 666 /dev/datadev*
 
    # Check for the loaded device
-   $ cat /proc/datadev0
+   $ cat /proc/datadev_0

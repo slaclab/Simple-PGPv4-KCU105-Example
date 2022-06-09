@@ -7,6 +7,8 @@ Rogue Software Setup
 If you are on the SLAC AFS network
 ==================================
 
+After you have cloned the repository :ref:`how_to_git_clone`
+
 Here's how to setup the SLAC AFS conda build of rogue:
 
 .. code-block:: bash

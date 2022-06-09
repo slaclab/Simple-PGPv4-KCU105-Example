@@ -7,7 +7,9 @@ Vivado and VCS Setup
 If you are on the SLAC AFS network
 ==================================
 
-Here's how to setup the Xilinx tools and licensing
+After you have cloned the repository :ref:`how_to_git_clone`
+
+Here's how to setup the Xilinx tools and licensing:
 
 .. code-block:: bash
 
