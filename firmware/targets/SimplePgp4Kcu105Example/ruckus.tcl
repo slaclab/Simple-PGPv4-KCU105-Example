@@ -11,4 +11,4 @@ loadConstraints -dir "$::DIR_PATH/hdl"
 
 # Load local SIM source Code
 loadSource -sim_only -dir  "$::DIR_PATH/tb"
-set_property top {Simple10GbePgp4Kcu105ExampleTb} [get_filesets sim_1]
+set_property top {SimplePgp4Kcu105ExampleTb} [get_filesets sim_1]

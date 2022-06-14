@@ -28,9 +28,29 @@ and set ``USE_XVC_DEBUG = 1`` in your target's makefile:
       # Using XVC Debug bridge
       export USE_XVC_DEBUG = 1
 
-In this firmware example, the ``surf.UdpDebugBridgeWrapper`` is mapped to Virtual Channel (VC) 2:
+In the firmware (``firmware/common/rtl/Pgp.vhd``), the ``surf.UdpDebugBridgeWrapper`` is mapped to Virtual Channel (VC) 2:
 
    .. code-block:: vhdl
+
+      U_VC2_RX : entity surf.PgpRxVcFifo
+         generic map (
+            TPD_G            => TPD_G,
+            ROGUE_SIM_EN_G   => SIMULATION_G,
+            PHY_AXI_CONFIG_G => PGP4_AXIS_CONFIG_C,
+            APP_AXI_CONFIG_G => EMAC_AXIS_CONFIG_C)
+         port map (
+            -- PGP Interface (pgpClk domain)
+            pgpClk      => pgpClk,
+            pgpRst      => pgpRst,
+            rxlinkReady => pgpRxOut.linkReady,
+            pgpRxMaster => pgpRxMasters(2),
+            pgpRxCtrl   => pgpRxCtrl(2),
+            pgpRxSlave  => pgpRxSlaves(2),
+            -- AXIS Interface (axisClk domain)
+            axisClk     => axilClock,
+            axisRst     => axilReset,
+            axisMaster  => ibXvcMaster,
+            axisSlave   => ibXvcSlave);
 
       U_XVC : entity surf.UdpDebugBridgeWrapper
          generic map (
@@ -45,38 +65,38 @@ In this firmware example, the ``surf.UdpDebugBridgeWrapper`` is mapped to Virtua
             ibServerMaster => obXvcMaster,
             ibServerSlave  => obXvcSlave);
 
-In python rogue, VC[2] is mapped to UDP server:
+      U_VC2_TX : entity surf.PgpTxVcFifo
+         generic map (
+            TPD_G            => TPD_G,
+            APP_AXI_CONFIG_G => EMAC_AXIS_CONFIG_C,
+            PHY_AXI_CONFIG_G => PGP4_AXIS_CONFIG_C)
+         port map (
+            -- AXIS Interface (axisClk domain)
+            axisClk     => axilClock,
+            axisRst     => axilReset,
+            axisMaster  => obXvcMaster,
+            axisSlave   => obXvcSlave,
+            -- PGP Interface (pgpClk domain)
+            pgpClk      => pgpClk,
+            pgpRst      => pgpRst,
+            rxlinkReady => pgpRxOut.linkReady,
+            txlinkReady => pgpTxOut.linkReady,
+            pgpTxMaster => pgpTxMasters(2),
+            pgpTxSlave  => pgpTxSlaves(2));
+
+In the software (``firmware/python/simple_pgp4_kcu105_example/_Root.py``), VC[2] is mapped to XVC server:
 
    .. code-block:: python
 
-      # Create (Xilinx Virtual Cable) XVC UDP server on localhost
-      self.xvc  = rogue.protocols.udp.Server(2542,False) # Server(port,jumbo)
+      # Create (Xilinx Virtual Cable) XVC on localhost
+      self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
+      self.addProtocol( self.xvc )
 
-      # Connect dmaStream[VC=2] to XVC UDP server
+      # Connect dmaStream[VC = 2] to XVC
       self.dmaStream[2] == self.xvc
 
-Next you will start up the rogue software, which will setup the UDP bridge to XVC.
-
-   .. code-block:: bash
-
-      $ cd Simple-PGPv4-KCU105-Example/software
-      $ python scripts/devGui.py
-
-Next you will build the XVC source:
-
-   .. code-block:: bash
-
-      $ cd Simple-PGPv4-KCU105-Example/software/xvcSrv/src
-      $ make
-
-Next you will connect execute the ``./xvcSrv -t <fw_ip_address>:<udp_server_port>`` command:
-
-   .. code-block:: bash
-
-      $ ./xvcSrv -t localhost:2542
-
-The XVC server is now running and ready to accept a XVC client connection.
-Next you will open ``Vivado Hardware Manager`` and ``open new target``:
+You will need to first start the rogue software (either GUI mode or interactive mode) to start the XVC server.
+Next, from Vivado main screen, you will open ``Vivado Hardware Manager`` and ``open new target``:
 
    .. image:: ../../images/xcv_0.png
      :width: 400
