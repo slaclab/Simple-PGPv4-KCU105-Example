@@ -1,73 +1,34 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>How to use Xilinx Virtual Cable (XVC) with ILA &mdash; Simple-PGPv4-KCU105-Example 974db8a documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+  <title>How to use Xilinx Virtual Cable (XVC) with ILA &mdash; Simple-PGPv4-KCU105-Example v1.0.0-14-g6777257 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-
-    
+    <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="How to the Rogue FileWriter and FileReader" href="fileio.html" />
     <link rel="prev" title="How to implement ILA in Vivado with ruckus" href="hardware_debug.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="../index.html" class="icon icon-home"> Simple-PGPv4-KCU105-Example
-          
-
-          
           </a>
-
-          
-            
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -75,18 +36,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction</a></li>
@@ -107,75 +57,33 @@
 </li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../index.html">Simple-PGPv4-KCU105-Example</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-        
           <li><a href="index.html">HowTos</a> &raquo;</li>
-        
       <li>How to use Xilinx Virtual Cable (XVC) with ILA</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
             <a href="../_sources/HowTo/remote_debug.rst.txt" rel="nofollow"> View page source</a>
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="how-to-use-xilinx-virtual-cable-xvc-with-ila">
-<span id="how-to-remote-debug"></span><h1>How to use Xilinx Virtual Cable (XVC) with ILA<a class="headerlink" href="#how-to-use-xilinx-virtual-cable-xvc-with-ila" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="how-to-use-xilinx-virtual-cable-xvc-with-ila">
+<span id="how-to-remote-debug"></span><h1>How to use Xilinx Virtual Cable (XVC) with ILA<a class="headerlink" href="#how-to-use-xilinx-virtual-cable-xvc-with-ila" title="Permalink to this headline"></a></h1>
 <p>The Xilinx Virtual Cable (XVC) lets you remotely access the ILA
 (A.K.A. <code class="docutils literal notranslate"><span class="pre">Chipscope</span></code>) via the KCU105 PGP (instead of using JTAG).
 The XVC will let you view and interact with ILA remotely via
@@ -199,55 +107,75 @@ and set <code class="docutils literal notranslate"><span class="pre">USE_XVC_DEB
 </pre></div>
 </div>
 </div></blockquote>
-<p>In this firmware example, the <code class="docutils literal notranslate"><span class="pre">surf.UdpDebugBridgeWrapper</span></code> is mapped to Virtual Channel (VC) 2:</p>
+<p>In the firmware (<code class="docutils literal notranslate"><span class="pre">firmware/common/rtl/Pgp.vhd</span></code>), the <code class="docutils literal notranslate"><span class="pre">surf.UdpDebugBridgeWrapper</span></code> is mapped to Virtual Channel (VC) 2:</p>
 <blockquote>
-<div><div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="n">U_XVC</span> <span class="o">:</span> <span class="k">entity</span> <span class="nc">surf</span><span class="p">.</span><span class="n">UdpDebugBridgeWrapper</span>
-   <span class="k">generic</span> <span class="k">map</span> <span class="p">(</span>
-      <span class="n">TPD_G</span> <span class="o">=&gt;</span> <span class="n">TPD_G</span><span class="p">)</span>
-   <span class="k">port</span> <span class="k">map</span> <span class="p">(</span>
-      <span class="c1">-- Clock and Reset</span>
-      <span class="n">clk</span>            <span class="o">=&gt;</span> <span class="n">axilClock</span><span class="p">,</span>
-      <span class="n">rst</span>            <span class="o">=&gt;</span> <span class="n">axilReset</span><span class="p">,</span>
-      <span class="c1">-- UDP XVC Interface</span>
-      <span class="n">obServerMaster</span> <span class="o">=&gt;</span> <span class="n">ibXvcMaster</span><span class="p">,</span>
-      <span class="n">obServerSlave</span>  <span class="o">=&gt;</span> <span class="n">ibXvcSlave</span><span class="p">,</span>
-      <span class="n">ibServerMaster</span> <span class="o">=&gt;</span> <span class="n">obXvcMaster</span><span class="p">,</span>
-      <span class="n">ibServerSlave</span>  <span class="o">=&gt;</span> <span class="n">obXvcSlave</span><span class="p">);</span>
+<div><div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="n">U_VC2_RX</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">entity</span><span class="w"> </span><span class="nc">surf</span><span class="p">.</span><span class="n">PgpRxVcFifo</span><span class="w"></span>
+<span class="w">   </span><span class="k">generic</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">TPD_G</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">TPD_G</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">ROGUE_SIM_EN_G</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">SIMULATION_G</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">PHY_AXI_CONFIG_G</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">PGP4_AXIS_CONFIG_C</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">APP_AXI_CONFIG_G</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">EMAC_AXIS_CONFIG_C</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="k">port</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- PGP Interface (pgpClk domain)</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpClk</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpClk</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpRst</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRst</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">rxlinkReady</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRxOut</span><span class="p">.</span><span class="n">linkReady</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpRxMaster</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRxMasters</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpRxCtrl</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRxCtrl</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpRxSlave</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRxSlaves</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- AXIS Interface (axisClk domain)</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisClk</span><span class="w">     </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilClock</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisRst</span><span class="w">     </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilReset</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisMaster</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ibXvcMaster</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisSlave</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ibXvcSlave</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">U_XVC</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">entity</span><span class="w"> </span><span class="nc">surf</span><span class="p">.</span><span class="n">UdpDebugBridgeWrapper</span><span class="w"></span>
+<span class="w">   </span><span class="k">generic</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">TPD_G</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">TPD_G</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="k">port</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- Clock and Reset</span><span class="w"></span>
+<span class="w">      </span><span class="n">clk</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilClock</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">rst</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilReset</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- UDP XVC Interface</span><span class="w"></span>
+<span class="w">      </span><span class="n">obServerMaster</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ibXvcMaster</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">obServerSlave</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">ibXvcSlave</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">ibServerMaster</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">obXvcMaster</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">ibServerSlave</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">obXvcSlave</span><span class="p">);</span><span class="w"></span>
+
+<span class="n">U_VC2_TX</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="k">entity</span><span class="w"> </span><span class="nc">surf</span><span class="p">.</span><span class="n">PgpTxVcFifo</span><span class="w"></span>
+<span class="w">   </span><span class="k">generic</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="n">TPD_G</span><span class="w">            </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">TPD_G</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">APP_AXI_CONFIG_G</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">EMAC_AXIS_CONFIG_C</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">PHY_AXI_CONFIG_G</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">PGP4_AXIS_CONFIG_C</span><span class="p">)</span><span class="w"></span>
+<span class="w">   </span><span class="k">port</span><span class="w"> </span><span class="k">map</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- AXIS Interface (axisClk domain)</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisClk</span><span class="w">     </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilClock</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisRst</span><span class="w">     </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">axilReset</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisMaster</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">obXvcMaster</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">axisSlave</span><span class="w">   </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">obXvcSlave</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="c1">-- PGP Interface (pgpClk domain)</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpClk</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpClk</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpRst</span><span class="w">      </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRst</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">rxlinkReady</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpRxOut</span><span class="p">.</span><span class="n">linkReady</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">txlinkReady</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpTxOut</span><span class="p">.</span><span class="n">linkReady</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpTxMaster</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpTxMasters</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"></span>
+<span class="w">      </span><span class="n">pgpTxSlave</span><span class="w">  </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">pgpTxSlaves</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>In python rogue, VC[2] is mapped to UDP server:</p>
+<p>In the software (<code class="docutils literal notranslate"><span class="pre">firmware/python/simple_pgp4_kcu105_example/_Root.py</span></code>), VC[2] is mapped to XVC server:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create (Xilinx Virtual Cable) XVC UDP server on localhost</span>
-<span class="bp">self</span><span class="o">.</span><span class="n">xvc</span>  <span class="o">=</span> <span class="n">rogue</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">udp</span><span class="o">.</span><span class="n">Server</span><span class="p">(</span><span class="mi">2542</span><span class="p">,</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Server(port,jumbo)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create (Xilinx Virtual Cable) XVC on localhost</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">xvc</span> <span class="o">=</span> <span class="n">rogue</span><span class="o">.</span><span class="n">protocols</span><span class="o">.</span><span class="n">xilinx</span><span class="o">.</span><span class="n">Xvc</span><span class="p">(</span> <span class="mi">2542</span> <span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">addProtocol</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvc</span> <span class="p">)</span>
 
-<span class="c1"># Connect dmaStream[VC=2] to XVC UDP server</span>
+<span class="c1"># Connect dmaStream[VC = 2] to XVC</span>
 <span class="bp">self</span><span class="o">.</span><span class="n">dmaStream</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvc</span>
 </pre></div>
 </div>
 </div></blockquote>
-<p>Next you will start up the rogue software, which will setup the UDP bridge to XVC.</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software
-$ python scripts/devGui.py
-</pre></div>
-</div>
-</div></blockquote>
-<p>Next you will build the XVC source:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software/xvcSrv/src
-$ make
-</pre></div>
-</div>
-</div></blockquote>
-<p>Next you will connect execute the <code class="docutils literal notranslate"><span class="pre">./xvcSrv</span> <span class="pre">-t</span> <span class="pre">&lt;fw_ip_address&gt;:&lt;udp_server_port&gt;</span></code> command:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./xvcSrv -t localhost:2542
-</pre></div>
-</div>
-</div></blockquote>
-<p>The XVC server is now running and ready to accept a XVC client connection.
-Next you will open <code class="docutils literal notranslate"><span class="pre">Vivado</span> <span class="pre">Hardware</span> <span class="pre">Manager</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">new</span> <span class="pre">target</span></code>:</p>
+<p>You will need to first start the rogue software (either GUI mode or interactive mode) to start the XVC server.
+Next, from Vivado main screen, you will open <code class="docutils literal notranslate"><span class="pre">Vivado</span> <span class="pre">Hardware</span> <span class="pre">Manager</span></code> and <code class="docutils literal notranslate"><span class="pre">open</span> <span class="pre">new</span> <span class="pre">target</span></code>:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/xcv_0.png"><img alt="Alternative text" src="../_images/xcv_0.png" style="width: 400px;" /></a>
 </div></blockquote>
@@ -279,54 +207,37 @@ Once the .ltx file is loaded, the ILA can now be access remotely via the Etherne
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/xcv_6.png"><img alt="Alternative text" src="../_images/xcv_6.png" style="width: 400px;" /></a>
 </div></blockquote>
-</div>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="fileio.html" class="btn btn-neutral float-right" title="How to the Rogue FileWriter and FileReader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="hardware_debug.html" class="btn btn-neutral float-left" title="How to implement ILA in Vivado with ruckus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fileio.html" class="btn btn-neutral float-right" title="How to the Rogue FileWriter and FileReader" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2021, SLAC National Accelerator Laboratory.
-
-    </p>
+    <p>&#169; Copyright 2021, SLAC National Accelerator Laboratory.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

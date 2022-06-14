@@ -29,7 +29,7 @@ How to create a tag release
 
    .. code-block:: bash
 
-      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/Simple10GbePgp4Kcu105Example
+      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/SimplePgp4Kcu105Example
 
 #. Optional: build only the release files without doing a tag
 
