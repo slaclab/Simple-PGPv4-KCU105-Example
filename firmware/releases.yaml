@@ -14,8 +14,8 @@ RogueScripts:
   - ../software/scripts/devGui.py
 
 Targets:
-  Simple10GbePgp4Kcu105Example:
-    ImageDir: targets/Simple10GbePgp4Kcu105Example/images
+  SimplePgp4Kcu105Example:
+    ImageDir: targets/SimplePgp4Kcu105Example/images
     Extensions:
       - bit
       - mcs
@@ -25,6 +25,6 @@ Releases:
   simple_pgp4_kcu105_example:
     Primary: True
     Targets:
-      - Simple10GbePgp4Kcu105Example
+      - SimplePgp4Kcu105Example
     Types:
       - Rogue

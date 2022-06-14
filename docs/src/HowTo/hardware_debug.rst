@@ -6,7 +6,7 @@ How to implement ILA in Vivado with ruckus
 
 * Add a "post_synthesis.tcl" to your target's vivado directory.  Here's an example
 
-   https://github.com/slaclab/Simple-PGPv4-KCU105-Example/blob/main/firmware/targets/Simple10GbePgp4Kcu105Example/vivado/post_synthesis.tcl
+   https://github.com/slaclab/Simple-PGPv4-KCU105-Example/blob/main/firmware/targets/SimplePgp4Kcu105Example/vivado/post_synthesis.tcl
 
 
 * Here the basic format of the TCL script

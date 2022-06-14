@@ -15,14 +15,14 @@ In the first terminal
 
    .. code-block:: bash
 
-      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/Simple10GbePgp4Kcu105Example
+      $ cd Simple-PGPv4-KCU105-Example/firmware/targets/SimplePgp4Kcu105Example
       $ make vcs
 
 #. Go to the VCS build output
 
    .. code-block:: bash
 
-      $ cd ../../build/Simple10GbePgp4Kcu105Example/Simple10GbePgp4Kcu105Example_project.sim/sim_1/behav/
+      $ cd ../../build/SimplePgp4Kcu105Example/SimplePgp4Kcu105Example_project.sim/sim_1/behav/
 
 #. Source the VCS + VHPI environment setup
 

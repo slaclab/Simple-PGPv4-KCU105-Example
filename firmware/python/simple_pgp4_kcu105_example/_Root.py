@@ -19,6 +19,8 @@ import rogue.utilities.fileio
 
 import simple_pgp4_kcu105_example as devBoard
 
+rogue.Version.minVersion('5.14.0')
+
 class Root(pr.Root):
     def __init__(   self,
             dev      = '/dev/datadev_0',
@@ -60,6 +62,13 @@ class Root(pr.Root):
             for vc in range(4):
                 self.dmaStream[vc] = rogue.hardware.axi.AxiStreamDma(dev,(0x100*lane)+vc,1)
 
+            # Create (Xilinx Virtual Cable) XVC on localhost
+            self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
+            self.addProtocol( self.xvc )
+
+            # Connect dmaStream[VC = 2] to XVC
+            self.dmaStream[2] == self.xvc
+
         else:
 
             # Start up flags are FALSE for simulation mode
@@ -96,15 +105,6 @@ class Root(pr.Root):
 
             # Also connect dmaStream[VC=1] to data writer
             self.dmaStream[1] >> self.dataWriter.getChannel(0)
-
-        #################################################################
-
-        # Create (Xilinx Virtual Cable) XVC on localhost
-        self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
-        self.addProtocol( self.xvc )
-
-        # Connect dmaStream[ VC = 2 ] to XVC
-        self.dmaStream[ 2 ] == self.xvc
 
         #################################################################
 

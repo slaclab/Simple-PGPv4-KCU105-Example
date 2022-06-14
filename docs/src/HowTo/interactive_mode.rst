@@ -26,7 +26,7 @@ How to run the Software in Interactive Mode
       UpTime       = 8 days, 22:45:50
       GitHash      = 0xa75a5f55b0ea87cb5b66f1ea1bff12272ae1bc73
       XilinxDnaId  = 0x4002000100fa6901008125c1
-      FwTarget     = Simple10GbePgp4Kcu105Example
+      FwTarget     = SimplePgp4Kcu105Examples
       BuildEnv     = Vivado v2021.1
       BuildServer  = rdsrv303 (Ubuntu 20.04.2 LTS)
       BuildDate    = Mon 19 Jul 2021 08:42:18 AM PDT
