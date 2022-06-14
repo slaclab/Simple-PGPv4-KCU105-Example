@@ -20,7 +20,7 @@ use surf.StdRtlPkg.all;
 use surf.AxiStreamPkg.all;
 use surf.AxiLitePkg.all;
 
-entity Simple10GbePgp4Kcu105Example is
+entity SimplePgp4Kcu105Example is
    generic (
       TPD_G        : time   := 1 ns;
       BUILD_INFO_G : BuildInfoType;
@@ -52,9 +52,9 @@ entity Simple10GbePgp4Kcu105Example is
       pgpRxN     : in    sl;
       pgpTxP     : out   sl;
       pgpTxN     : out   sl);
-end Simple10GbePgp4Kcu105Example;
+end SimplePgp4Kcu105Example;
 
-architecture top_level of Simple10GbePgp4Kcu105Example is
+architecture top_level of SimplePgp4Kcu105Example is
 
    signal heartbeat   : sl;
    signal rxlinkReady : sl;
