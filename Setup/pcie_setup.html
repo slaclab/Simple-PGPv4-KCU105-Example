@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PCIe Card Setup &mdash; Simple-PGPv4-KCU105-Example v1.0.0-14-g6777257 documentation</title>
+  <title>PCIe Card Setup &mdash; Simple-PGPv4-KCU105-Example v2.2.0-1-g0d1c69c documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Simple-PGPv4-KCU105-Example
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Simple-PGPv4-KCU105-Example
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -64,9 +70,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Setup</a> &raquo;</li>
-      <li>PCIe Card Setup</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Setup</a></li>
+      <li class="breadcrumb-item active">PCIe Card Setup</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Setup/pcie_setup.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -77,32 +83,32 @@
            <div itemprop="articleBody">
              
   <section id="pcie-card-setup">
-<span id="pcie-setup"></span><h1>PCIe Card Setup<a class="headerlink" href="#pcie-card-setup" title="Permalink to this headline"></a></h1>
+<span id="pcie-setup"></span><h1>PCIe Card Setup<a class="headerlink" href="#pcie-card-setup" title="Permalink to this heading"></a></h1>
 <p>You will need one of the “Pgp4_10Gbps” PCIe hardware platforms that’s released in this Github repo:</p>
 <p><a class="reference external" href="https://github.com/slaclab/pgp-pcie-apps/releases">https://github.com/slaclab/pgp-pcie-apps/releases</a></p>
 <p>You will need to use the “aes-stream-drivers/data_dev” DMA driver for this example.
 Here’s how to clone/build/load this driver:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Confirm that you have the board the computer with VID=1a4a (&quot;SLAC&quot;) and PID=2030 (&quot;AXI Stream DAQ&quot;)</span>
-$ lspci -nn <span class="p">|</span> grep SLAC
-<span class="m">04</span>:00.0 Signal processing controller <span class="o">[</span><span class="m">1180</span><span class="o">]</span>: SLAC National Accelerator Lab TID-AIR AXI Stream DAQ PCIe card <span class="o">[</span>1a4a:2030<span class="o">]</span>
+$<span class="w"> </span>lspci<span class="w"> </span>-nn<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>SLAC
+<span class="m">04</span>:00.0<span class="w"> </span>Signal<span class="w"> </span>processing<span class="w"> </span>controller<span class="w"> </span><span class="o">[</span><span class="m">1180</span><span class="o">]</span>:<span class="w"> </span>SLAC<span class="w"> </span>National<span class="w"> </span>Accelerator<span class="w"> </span>Lab<span class="w"> </span>TID-AIR<span class="w"> </span>AXI<span class="w"> </span>Stream<span class="w"> </span>DAQ<span class="w"> </span>PCIe<span class="w"> </span>card<span class="w"> </span><span class="o">[</span>1a4a:2030<span class="o">]</span>
 
 <span class="c1"># Clone the driver github repo:</span>
-$ git clone --recursive https://github.com/slaclab/aes-stream-drivers
+$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/slaclab/aes-stream-drivers
 
 <span class="c1"># Go to the driver directory</span>
-$ <span class="nb">cd</span> aes-stream-drivers/data_dev/driver/
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>aes-stream-drivers/data_dev/driver/
 
 <span class="c1"># Build the driver</span>
-$ make
+$<span class="w"> </span>make
 
 <span class="c1"># Load the driver</span>
-$ sudo /sbin/insmod ./datadev.ko <span class="nv">cfgSize</span><span class="o">=</span>0x50000 <span class="nv">cfgRxCount</span><span class="o">=</span><span class="m">256</span> <span class="nv">cfgTxCount</span><span class="o">=</span><span class="m">16</span>
+$<span class="w"> </span>sudo<span class="w"> </span>/sbin/insmod<span class="w"> </span>./datadev.ko<span class="w"> </span><span class="nv">cfgSize</span><span class="o">=</span>0x50000<span class="w"> </span><span class="nv">cfgRxCount</span><span class="o">=</span><span class="m">256</span><span class="w"> </span><span class="nv">cfgTxCount</span><span class="o">=</span><span class="m">16</span>
 
 <span class="c1"># Give appropriate group/permissions</span>
-$ sudo chmod <span class="m">666</span> /dev/datadev*
+$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span><span class="m">666</span><span class="w"> </span>/dev/datadev*
 
 <span class="c1"># Check for the loaded device</span>
-$ cat /proc/datadev_0
+$<span class="w"> </span>cat<span class="w"> </span>/proc/datadev_0
 </pre></div>
 </div>
 </section>

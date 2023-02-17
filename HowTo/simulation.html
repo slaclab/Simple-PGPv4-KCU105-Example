@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>How to run the Software Development GUI with VCS firmware simulator &mdash; Simple-PGPv4-KCU105-Example v1.0.0-14-g6777257 documentation</title>
+  <title>How to run the Software Development GUI with VCS firmware simulator &mdash; Simple-PGPv4-KCU105-Example v2.2.0-1-g0d1c69c documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -14,7 +14,9 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -27,11 +29,15 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Simple-PGPv4-KCU105-Example
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Simple-PGPv4-KCU105-Example
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -74,9 +80,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">HowTos</a> &raquo;</li>
-      <li>How to run the Software Development GUI with VCS firmware simulator</li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">HowTos</a></li>
+      <li class="breadcrumb-item active">How to run the Software Development GUI with VCS firmware simulator</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/HowTo/simulation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -87,37 +93,37 @@
            <div itemprop="articleBody">
              
   <section id="how-to-run-the-software-development-gui-with-vcs-firmware-simulator">
-<span id="how-to-simulation"></span><h1>How to run the Software Development GUI with VCS firmware simulator<a class="headerlink" href="#how-to-run-the-software-development-gui-with-vcs-firmware-simulator" title="Permalink to this headline"></a></h1>
+<span id="how-to-simulation"></span><h1>How to run the Software Development GUI with VCS firmware simulator<a class="headerlink" href="#how-to-run-the-software-development-gui-with-vcs-firmware-simulator" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p>Start up two terminal …</p></li>
 </ul>
 <section id="in-the-first-terminal">
-<h2>In the first terminal<a class="headerlink" href="#in-the-first-terminal" title="Permalink to this headline"></a></h2>
+<h2>In the first terminal<a class="headerlink" href="#in-the-first-terminal" title="Permalink to this heading"></a></h2>
 <ol class="arabic">
 <li><p>Setup Vivado and VCS (refer to <a class="reference internal" href="../Setup/vivado_setup.html#setup-vivado-setup"><span class="std std-ref">Vivado and VCS Setup</span></a>)</p></li>
 <li><p>Go to the target directory and execute the <cite>vcs</cite> build</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/firmware/targets/SimplePgp4Kcu105Example
-$ make vcs
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Simple-PGPv4-KCU105-Example/firmware/targets/SimplePgp4Kcu105Example
+$<span class="w"> </span>make<span class="w"> </span>vcs
 </pre></div>
 </div>
 </li>
 <li><p>Go to the VCS build output</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> ../../build/SimplePgp4Kcu105Example/SimplePgp4Kcu105Example_project.sim/sim_1/behav/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>../../build/SimplePgp4Kcu105Example/SimplePgp4Kcu105Example_project.sim/sim_1/behav/
 </pre></div>
 </div>
 </li>
 <li><p>Source the VCS + VHPI environment setup</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">source</span> setup_env.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>setup_env.sh
 </pre></div>
 </div>
 </li>
 <li><p>Compile firmware with VCS</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./sim_vcs_mx.sh
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./sim_vcs_mx.sh
 </pre></div>
 </div>
 </li>
 <li><p>Launch the VCS GUI (either DVE or VERDI)</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ ./simv -gui<span class="o">=</span>dve <span class="p">&amp;</span> <span class="o">(</span>or $ ./simv -gui<span class="o">=</span>verdi -verdi_opts -sx <span class="p">&amp;</span><span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./simv<span class="w"> </span>-gui<span class="o">=</span>dve<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="o">(</span>or<span class="w"> </span>$<span class="w"> </span>./simv<span class="w"> </span>-gui<span class="o">=</span>verdi<span class="w"> </span>-verdi_opts<span class="w"> </span>-sx<span class="w"> </span><span class="p">&amp;</span><span class="o">)</span>
 </pre></div>
 </div>
 </li>
@@ -127,12 +133,12 @@ $ make vcs
 </ol>
 </section>
 <section id="in-the-second-terminal">
-<h2>In the Second terminal<a class="headerlink" href="#in-the-second-terminal" title="Permalink to this headline"></a></h2>
+<h2>In the Second terminal<a class="headerlink" href="#in-the-second-terminal" title="Permalink to this heading"></a></h2>
 <ol class="arabic">
 <li><p>Setup rogue software (refer to <a class="reference internal" href="../Setup/rogue_setup.html#setup-rogue-setup"><span class="std std-ref">Rogue Software Setup</span></a>)</p></li>
 <li><p>run the Development GUI python script with <strong>–dev sim</strong> argument</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ <span class="nb">cd</span> Simple-PGPv4-KCU105-Example/software
-$ python scripts/devGui.py --dev sim
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>Simple-PGPv4-KCU105-Example/software
+$<span class="w"> </span>python<span class="w"> </span>scripts/devGui.py<span class="w"> </span>--dev<span class="w"> </span>sim
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../_images/cosimGui.png"><img alt="Alternative text" src="../_images/cosimGui.png" style="width: 800px;" /></a>
