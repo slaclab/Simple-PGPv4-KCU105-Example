@@ -41,7 +41,7 @@ class Root(pr.Root):
         #################################################################
 
         self.enSwRx = not promProg and enSwRx
-        self.sim    = (ip == 'sim')
+        self.sim    = (dev == 'sim')
         if (self.sim):
             # Set the timeout
             self._timeout = 100000000 # firmware simulation slow and timeout base on real time (not simulation time)
