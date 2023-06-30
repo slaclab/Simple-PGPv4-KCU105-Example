@@ -70,14 +70,6 @@ if __name__ == "__main__":
         help     = "Sets the GUI type (PyDM or None)",
     )
 
-    parser.add_argument(
-        "--serverPort",
-        type     = int,
-        required = False,
-        default  = 9099,
-        help     = "Zeromq server port",
-    )
-
     # Get the arguments
     args = parser.parse_args()
 
@@ -88,7 +80,6 @@ if __name__ == "__main__":
         lane       = args.lane,
         pollEn     = args.pollEn,
         initRead   = args.initRead,
-        serverPort = args.serverPort,
     ) as root:
 
         ######################
@@ -96,9 +87,9 @@ if __name__ == "__main__":
         ######################
         if (args.guiType == 'PyDM'):
             pyrogue.pydm.runPyDM(
-                root  = root,
-                sizeX = 800,
-                sizeY = 800,
+                serverList = root.zmqServer.address,
+                sizeX      = 800,
+                sizeY      = 800,
             )
 
         #################
