@@ -14,7 +14,7 @@ import sys
 import time
 import argparse
 
-import pyrogue as pr
+import pyrogue
 import pyrogue.pydm
 
 import simple_pgp4_kcu105_example as devBoard
@@ -96,11 +96,8 @@ if __name__ == "__main__":
         # No GUI
         #################
         elif (args.guiType == 'None'):
-
-            # Wait to be killed via Ctrl-C
-            print('Running root server.  Hit Ctrl-C to exit')
-            while (root._running):
-                time.sleep(1)
+            print("Running without GUI...")
+            pyrogue.waitCntrlC()
 
         ####################
         # Undefined GUI type
