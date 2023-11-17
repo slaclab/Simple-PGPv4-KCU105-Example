@@ -10,7 +10,6 @@ This section describes hardware/firmware/software setup requirements and procedu
    :maxdepth: 1
    :caption: Setup:
 
-   cloning
    hardware_setup
    pcie_setup
    vivado_setup
