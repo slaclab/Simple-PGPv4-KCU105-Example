@@ -8,4 +8,4 @@ Make sure you have completed the ":ref:`setup_git_cloning`" before continuing
 
 .. code-block:: bash
 
-  $ git clone --recursive git@github.com:slaclab/Simple-PGPv4-KCU105-Example
+  $ git clone --recursive https://github.com/slaclab/Simple-PGPv4-KCU105-Example.git
