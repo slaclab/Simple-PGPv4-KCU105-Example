@@ -265,66 +265,28 @@ begin
          pgpTxMaster => pgpTxMasters(1),
          pgpTxSlave  => pgpTxSlaves(1));
 
-
-   GEN_REAL : if (SIMULATION_G = false) generate
-
-      U_VC2_RX : entity surf.PgpRxVcFifo
-         generic map (
-            TPD_G            => TPD_G,
-            ROGUE_SIM_EN_G   => SIMULATION_G,
-            PHY_AXI_CONFIG_G => PGP4_AXIS_CONFIG_C,
-            APP_AXI_CONFIG_G => EMAC_AXIS_CONFIG_C)
-         port map (
-            -- PGP Interface (pgpClk domain)
-            pgpClk      => pgpClk,
-            pgpRst      => pgpRst,
-            rxlinkReady => pgpRxOut.linkReady,
-            pgpRxMaster => pgpRxMasters(2),
-            pgpRxCtrl   => pgpRxCtrl(2),
-            pgpRxSlave  => pgpRxSlaves(2),
-            -- AXIS Interface (axisClk domain)
-            axisClk     => axilClock,
-            axisRst     => axilReset,
-            axisMaster  => ibXvcMaster,
-            axisSlave   => ibXvcSlave);
-
-      -----------------------------------------------------------------
-      -- Xilinx Virtual Cable (XVC)
-      -- https://www.xilinx.com/products/intellectual-property/xvc.html
-      -----------------------------------------------------------------
-      U_XVC : entity surf.UdpDebugBridgeWrapper
-         generic map (
-            TPD_G => TPD_G)
-         port map (
-            -- Clock and Reset
-            clk            => axilClock,
-            rst            => axilReset,
-            -- UDP XVC Interface
-            obServerMaster => ibXvcMaster,
-            obServerSlave  => ibXvcSlave,
-            ibServerMaster => obXvcMaster,
-            ibServerSlave  => obXvcSlave);
-
-      U_VC2_TX : entity surf.PgpTxVcFifo
-         generic map (
-            TPD_G            => TPD_G,
-            APP_AXI_CONFIG_G => EMAC_AXIS_CONFIG_C,
-            PHY_AXI_CONFIG_G => PGP4_AXIS_CONFIG_C)
-         port map (
-            -- AXIS Interface (axisClk domain)
-            axisClk     => axilClock,
-            axisRst     => axilReset,
-            axisMaster  => obXvcMaster,
-            axisSlave   => obXvcSlave,
-            -- PGP Interface (pgpClk domain)
-            pgpClk      => pgpClk,
-            pgpRst      => pgpRst,
-            rxlinkReady => pgpRxOut.linkReady,
-            txlinkReady => pgpTxOut.linkReady,
-            pgpTxMaster => pgpTxMasters(2),
-            pgpTxSlave  => pgpTxSlaves(2));
-
-   end generate;
+   U_VC2_XVC : entity surf.PgpXvcWrapper
+      generic map (
+         TPD_G            => TPD_G,
+         SIMULATION_G     => SIMULATION_G,
+         AXIS_CLK_FREQ_G  => 156.25E+6,
+         PHY_AXI_CONFIG_G => PGP4_AXIS_CONFIG_C)
+      port map (
+         -- Clock and Reset (xvcClk domain)
+         xvcClk      => axilClock,
+         xvcRst      => axilReset,
+         -- Clock and Reset (pgpClk domain)
+         pgpClk      => pgpClk,
+         pgpRst      => pgpRst,
+         -- PGP Interface (pgpClk domain)
+         rxlinkReady => pgpRxOut.linkReady,
+         txlinkReady => pgpTxOut.linkReady,
+         -- TX FIFO  (pgpClk domain)
+         pgpTxMaster => pgpTxMasters(2),
+         pgpTxSlave  => pgpTxSlaves(2),
+         -- RX FIFO  (pgpClk domain)
+         pgpRxMaster => pgpRxMasters(2),
+         pgpRxCtrl   => pgpRxCtrl(2));
 
    ------------------------
    -- AXI Stream Monitoring
