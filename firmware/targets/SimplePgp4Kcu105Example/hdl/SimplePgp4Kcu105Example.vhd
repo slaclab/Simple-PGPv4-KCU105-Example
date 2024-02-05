@@ -25,7 +25,7 @@ entity SimplePgp4Kcu105Example is
       TPD_G        : time   := 1 ns;
       BUILD_INFO_G : BuildInfoType;
       SIMULATION_G : boolean := false;
-      RATE_G       : string  := "10.3125Gbps");  -- or "6.25Gbps" or "3.125Gbps"
+      RATE_G       : string  := "6.25Gbps");  -- or "6.25Gbps" or "3.125Gbps"
    port (
       -- I2C Ports
       sfpTxDisL  : out   sl;
