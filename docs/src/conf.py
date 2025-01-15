@@ -60,7 +60,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'Simple-PGPv4-KCU105-Example'
-copyright = '2021, SLAC National Accelerator Laboratory'
+copyright = '2025, SLAC National Accelerator Laboratory'
 author = 'SLAC TID-ID-ES'
 
 # The version info for the project you're documenting, acts as replacement for
