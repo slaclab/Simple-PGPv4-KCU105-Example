@@ -20,6 +20,11 @@ source -quiet $::env(RUCKUS_DIR)/vivado_proc.tcl
 ######################################################
 #return
 
+############################
+## Open the synthesis design
+############################
+open_run synth_1
+
 ###############################
 ## Set the name of the ILA core
 ###############################
@@ -38,7 +43,7 @@ set_property C_DATA_DEPTH 1024 [get_debug_cores ${ilaName}]
 #################################
 ## Set the clock for the ILA core
 #################################
-SetDebugCoreClk ${ilaName} {axilClk}
+SetDebugCoreClk ${ilaName} {U_Core/GEN_REAL.U_XbarI2cMux/axilClk}
 
 #######################
 ## Set the debug Probes
