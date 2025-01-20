@@ -67,11 +67,12 @@ class Root(pr.Root):
                 self.dmaStream[vc] = rogue.hardware.axi.AxiStreamDma(dev,(0x100*lane)+vc,1)
 
             # Create (Xilinx Virtual Cable) XVC on localhost
-            self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
-            self.addProtocol( self.xvc )
+            if not promProg:
+                self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
+                self.addProtocol( self.xvc )
 
-            # Connect dmaStream[VC = 2] to XVC
-            self.dmaStream[2] == self.xvc
+                # Connect dmaStream[VC = 2] to XVC
+                self.dmaStream[2] == self.xvc
 
         else:
 
