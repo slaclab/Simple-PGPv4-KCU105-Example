@@ -29,7 +29,7 @@ class Root(pr.Root):
             initRead = True,  # Read all registers at start of the system
             promProg = False, # Flag to disable all devices not related to PROM programming
             enSwRx   = True,  # Flag to enable the software stream receiver
-            zmqSrvEn = False, # Flag to include the ZMQ server
+            zmqSrvEn = True,  # Flag to include the ZMQ server
             xvcSrvEn = True,  # Flag to include the XVC server
             **kwargs):
         super().__init__(**kwargs)
