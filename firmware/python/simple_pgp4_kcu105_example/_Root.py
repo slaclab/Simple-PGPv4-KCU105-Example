@@ -29,7 +29,8 @@ class Root(pr.Root):
             initRead = True,  # Read all registers at start of the system
             promProg = False, # Flag to disable all devices not related to PROM programming
             enSwRx   = True,  # Flag to enable the software stream receiver
-            zmqSrvEn = True,  # Flag to include the ZMQ server
+            zmqSrvEn = False, # Flag to include the ZMQ server
+            xvcSrvEn = True,  # Flag to include the XVC server
             **kwargs):
         super().__init__(**kwargs)
 
@@ -41,6 +42,7 @@ class Root(pr.Root):
         #################################################################
 
         self.enSwRx = not promProg and enSwRx
+        self.promProg = promProg
         self.sim    = (dev == 'sim')
         if (self.sim):
             # Set the timeout
@@ -67,7 +69,7 @@ class Root(pr.Root):
                 self.dmaStream[vc] = rogue.hardware.axi.AxiStreamDma(dev,(0x100*lane)+vc,1)
 
             # Create (Xilinx Virtual Cable) XVC on localhost
-            if not promProg:
+            if not self.promProg and xvcSrvEn:
                 self.xvc = rogue.protocols.xilinx.Xvc( 2542 )
                 self.addProtocol( self.xvc )
 
